@@ -3196,6 +3196,18 @@ public class TwidereService extends Service implements Constants {
 					where.append(Statuses.RETWEET_ID + " IN ( " + ids_string + " ) ");
 					where.append(")");
 					mResolver.delete(uri, where.toString(), null);
+					
+					/**
+					 * UCD
+					 */
+					final String UCD_new_status_ids = ListUtils.toString(
+							account_newly_inserted, ',', true);
+					edu.ucdavis.earlybird.Util.profile(getOuterType(),
+							account_id, "Profile.csv",
+							"Download tweets, "+UCD_new_status_ids);
+					/*
+					 *
+					 **/
 				}
 
 				// Insert previously fetched items.

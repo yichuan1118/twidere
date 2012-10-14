@@ -223,6 +223,22 @@ public class TwidereLinkify {
 	}
 
 	public final void addAllLinks() {
+		/**
+		 * UCD
+		 * Replace URLSpan with LinkSpan, so we get notified when user clicks it.
+		 */
+		final SpannableString string = SpannableString.valueOf(view.getText());
+		final URLSpan[] URLSpans = string.getSpans(0, string.length(), URLSpan.class);
+		for(final URLSpan s: URLSpans){
+			final int start = string.getSpanStart(s);
+			final int end = string.getSpanEnd(s);
+			final String url = s.getURL();
+			string.removeSpan(s);
+			applyLink(url, start, end, string, LINK_TYPE_LINK);
+		}
+		/*
+		 *
+		 **/
 		for (final int type : ALL_LINK_TYPES) {
 			addLinks(type);
 		}

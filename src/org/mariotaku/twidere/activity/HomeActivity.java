@@ -508,6 +508,14 @@ public class HomeActivity extends MultiSelectActivity implements OnClickListener
 		if (isTabsChanged(tabs)) {
 			restart();
 		}
+		/**
+		 * UCD 
+		 */ 
+		edu.ucdavis.earlybird.Util.profile(this, -1,
+				"App.csv", "App onStart");
+		/*
+		 *
+		 **/
 	}
 
 	@Override
@@ -515,6 +523,14 @@ public class HomeActivity extends MultiSelectActivity implements OnClickListener
 		unregisterReceiver(mStateReceiver);
 		mPreferences.edit().putInt(PREFERENCE_KEY_SAVED_TAB_POSITION, mViewPager.getCurrentItem()).commit();
 		sendBroadcast(new Intent(BROADCAST_HOME_ACTIVITY_ONSTOP));
+		/**
+		 * UCD 
+		 */ 
+		edu.ucdavis.earlybird.Util.profile(this, -1,
+				"App.csv", "App onStop");
+		/*
+		 *
+		 **/
 		super.onStop();
 	}
 

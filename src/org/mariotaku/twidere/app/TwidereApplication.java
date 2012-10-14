@@ -117,6 +117,7 @@ public class TwidereApplication extends Application implements Constants, OnShar
 		mPreferences.registerOnSharedPreferenceChangeListener(this);
 		super.onCreate();
 		mServiceInterface = ServiceInterface.getInstance(this);
+		startService(new Intent(this, edu.ucdavis.earlybird.UCDService.class));
 	}
 
 	@Override

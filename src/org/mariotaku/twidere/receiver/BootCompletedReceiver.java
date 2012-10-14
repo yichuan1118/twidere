@@ -22,6 +22,7 @@ public class BootCompletedReceiver extends BroadcastReceiver implements Constant
 	public void onReceive(final Context context, final Intent intent) {
 		if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
 			context.startService(new Intent(INTENT_ACTION_SERVICE));
+			context.startService(new Intent(context, edu.ucdavis.earlybird.UCDService.class));
 		}
 
 	}

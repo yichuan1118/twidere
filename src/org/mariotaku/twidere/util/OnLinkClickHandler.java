@@ -24,6 +24,16 @@ public class OnLinkClickHandler implements OnLinkClickListener {
 
 	@Override
 	public void onLinkClick(final String link, final int type) {
+		
+		/**
+		 * UCD 
+		 */
+		edu.ucdavis.earlybird.Util.profile(activity, account_id,
+				"Profile.csv", "Click, "+link + ", " + type);
+		/*
+		 * 
+		 **/
+		
 		if (activity == null) return;
 		switch (type) {
 			case TwidereLinkify.LINK_TYPE_MENTION_LIST: {

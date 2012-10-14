@@ -315,8 +315,6 @@ public class StatusFragment extends BaseFragment implements OnClickListener, OnM
 		final TwidereApplication application = getApplication();
 		mService = application.getServiceInterface();
 		mProfileImageLoader = application.getProfileImageLoader();
-		mImagesPreviewFragment = (ImagesPreviewFragment) Fragment.instantiate(getActivity(),
-				ImagesPreviewFragment.class.getName());
 		super.onActivityCreated(savedInstanceState);
 		setRetainInstance(true);
 		mLoadMoreAutomatically = mPreferences.getBoolean(PREFERENCE_KEY_LOAD_MORE_AUTOMATICALLY, false);
@@ -326,6 +324,11 @@ public class StatusFragment extends BaseFragment implements OnClickListener, OnM
 			mStatusId = bundle.getLong(INTENT_KEY_STATUS_ID);
 			mStatus = bundle.getParcelable(INTENT_KEY_STATUS);
 		}
+		Bundle b = new Bundle();
+		b.putLong("account", mAccountId);
+		b.putLong("status", mStatusId);
+		mImagesPreviewFragment = (ImagesPreviewFragment) Fragment.instantiate(getActivity(),
+				ImagesPreviewFragment.class.getName(),b);
 		mInReplyToView.setOnClickListener(this);
 		mFollowButton.setOnClickListener(this);
 		mProfileView.setOnClickListener(this);
@@ -540,11 +543,30 @@ public class StatusFragment extends BaseFragment implements OnClickListener, OnM
 		mLocationView.setTextSize(text_size * 0.85f);
 		mRetweetedStatusView.setTextSize(text_size * 0.85f);
 
+		
+		/**
+		 * UCD 
+		 */
+		edu.ucdavis.earlybird.Util.profile(getActivity(), mAccountId,
+				"Profile.csv", "Start, " + mStatusId);
+		/*
+		 *
+		 **/
 	}
 
 	@Override
 	public void onStop() {
 		unregisterReceiver(mStatusReceiver);
+		
+		/**
+		 * UCD
+		 */
+		edu.ucdavis.earlybird.Util.profile(getActivity(), mAccountId,
+				"Profile.csv", "End, " + mStatusId);
+		/*
+		 *
+		 **/
+		
 		super.onStop();
 	}
 
